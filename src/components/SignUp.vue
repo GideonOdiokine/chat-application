@@ -31,7 +31,7 @@ export default {
 
       email.value = "";
       password.value = "";
-      displayName.value = "";
+      displayName.value = ""
     };
     return { displayName, email, password, handleSubmit, error };
   },
