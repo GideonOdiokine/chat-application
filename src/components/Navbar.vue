@@ -1,8 +1,8 @@
 <template>
-  <nav>
+  <nav v-if="user">
     <div>
-      <p>Hey there...</p>
-      <p class="email">currently logged in as ....</p>
+      <p>Hey {{ user.displayName }}</p>
+      <p class="email">currently logged in as {{ user.email }}</p>
     </div>
     <button @click="logoutChat">Logout</button>
   </nav>
@@ -10,19 +10,23 @@
 
 <script>
 import useLogout from "../composables/useLogout";
+import getUser from "../composables/getUser";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const { error, logout } = useLogout();
+    const { user } = getUser();
+    const router = useRouter();
 
     const logoutChat = async () => {
       await logout();
       if (!error.value) {
-        console.log("User Logout");
+        router.push({ name: "Welcome" });
       }
     };
 
-    return { error, logoutChat };
+    return { error, user, logoutChat };
   },
 };
 </script>
