@@ -8,15 +8,17 @@
 
 <script>
 import { ref } from "vue";
+import useLogin from "../composables/useLogin";
+
 export default {
   setup() {
+    const { error, login } = useLogin();
     // refs
     const email = ref("");
     const password = ref("");
 
-    const handleSubmit = () => {
-      console.log(email.value);
-      console.log(password.value);
+    const handleSubmit = async () => {
+      await login(email.value, password.value);
     };
     return { email, password, handleSubmit };
   },
