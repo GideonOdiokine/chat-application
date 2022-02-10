@@ -30,7 +30,7 @@ export default {
       await signup(email.value, password.value, displayName.value);
 
       if(!error.value){
-        context.emit("signup")
+        context.emit("signup") 
       }
       email.value = "";
       password.value = "";

@@ -3,7 +3,7 @@
     <p>Welcome</p>
     <div v-if="showLogin">
       <h2>Login</h2>
-      <Login @login ="enterChat"/>
+      <Login @login="enterChat" />
       <p>No account yet? <span @click="showLogin = false">Signup </span></p>
     </div>
     <div v-else>
@@ -18,19 +18,19 @@
 import { ref } from "vue";
 import Signup from "../components/SignUp.vue";
 import Login from "../components/Login.vue";
-import {useRouter} from 'vue-router'
+import { useRouter } from "vue-router";
 export default {
   components: { Signup, Login },
 
   setup() {
     //   refs
     const showLogin = ref(true);
-    const router=useRouter();
-    const enterChat=()=>{
-      router.push({name:'Chatroom'})
-    }
+    const router = useRouter();
+    const enterChat = () => {
+      router.push({ name: "Chatroom" });
+    };
 
-    return { showLogin,enterChat };
+    return { showLogin, enterChat };
   },
 };
 </script>
