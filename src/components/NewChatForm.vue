@@ -11,12 +11,14 @@
 <script>
 import { ref } from "vue";
 import getUser from "../composables/getUser";
+import useCollection from "../composables/useCollection";
 import { timestamp } from "../firebase/config";
 
 export default {
   setup() {
     const message = ref("");
     const { user } = getUser();
+    const { addDoc, error } = useCollection("messages");
 
     const handleSubmit = async () => {
       const chat = {
@@ -24,10 +26,12 @@ export default {
         message: message.value,
         createdAt: timestamp(),
       };
-      message.value=""
+
+      await addDoc(chat);
+      message.value = "";
       console.log(Object.values(chat));
     };
-    return { message, handleSubmit };
+    return { message, handleSubmit, error };
   },
 };
 </script>
