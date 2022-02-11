@@ -24,7 +24,8 @@ export default {
         message: message.value,
         createdAt: timestamp(),
       };
-      console.log(chat);
+      message.value=""
+      console.log(Object.values(chat));
     };
     return { message, handleSubmit };
   },
