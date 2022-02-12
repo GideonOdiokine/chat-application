@@ -36,14 +36,15 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #000;
 }
 nav p {
   margin: 2px auto;
   font-size: 16px;
-  color: #444;
+  color: rgb(255, 250, 250);
 }
 nav p.email {
   font-size: 14px;
-  color: #999;
+  color: rgb(167, 161, 161);
 }
 </style>
