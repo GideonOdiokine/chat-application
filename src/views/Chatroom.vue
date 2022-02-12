@@ -1,6 +1,6 @@
 <template>
+  <Navbar />
   <div class="container">
-    <Navbar />
     <ChatWindow />
     <NewChatForm />
   </div>
