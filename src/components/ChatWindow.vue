@@ -1,11 +1,27 @@
 <template>
   <div class="chat-window">
+    <h2>Chat Messages</h2>
     <div v-if="error">{{ error }}</div>
     <div v-if="formattedDocuments" class="messages">
-      <div v-for="doc in formattedDocuments" :key="doc.id" class="single">
-        <span class="created-at">{{ doc.createdAt }}</span>
-        <span class="name">{{ doc.name }}</span>
-        <span class="message">{{ doc.message }}</span>
+      <div
+        v-for="(doc, index) in formattedDocuments"
+        :key="doc.id"
+        class="single"
+      >
+        <div class="container" :class="{ darker: index % 2 === 1 }">
+          <div>
+            <span class="name">{{ doc.name }}</span>
+            <p>{{ doc.message }}</p>
+            <span
+              :style="[
+                index % 2 === 1
+                  ? 'float: left; color: #as2'
+                  : 'float: right; color: #aa3 ',
+              ]"
+              >{{ doc.createdAt }} ago</span
+            >
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -33,18 +49,59 @@ export default {
 </script>
 
 <style scoped>
-.chat-window {
-  background: #fafafa;
-  padding: 30px 20px;
+h2 {
+  padding: 20px;
 }
-.single {
-  margin: 18px 0;
+.container {
+  width: auto;
+  max-width: auto;
+  margin: 80px auto;
+  border-radius: 20px;
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
 }
-.created-at {
-  display: block;
+/* Darker chat container */
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+/* Clear floats */
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Style images */
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+/* Style the right image */
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right: 0;
+}
+
+/* Style time text */
+.rightTime {
+  float: right;
+  color: #aaa;
+}
+
+/* Style time text */
+.timeleft {
+  float: left;
   color: #999;
-  font-size: 12px;
-  margin-bottom: 4px;
 }
 .name {
   font-weight: bold;
@@ -52,6 +109,15 @@ export default {
 }
 .messages {
   max-height: 400px;
+
   overflow: auto;
+  border: 2px solid #ffffff;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
 }
+/* .right {
+  position: relative;
+} */
 </style>
