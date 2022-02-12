@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import { db } from "../firebase/config";
 
 const getCollection = (collection) => {
@@ -7,7 +7,7 @@ const getCollection = (collection) => {
 
   // register the db collection reference
   let collectionRef = db.collection(collection).orderBy("createdAt");
-  collectionRef.onSnapshot(
+  const unsub = collectionRef.onSnapshot(
     (snap) => {
       let results = [];
       snap.docs.forEach((doc) => {
@@ -26,6 +26,11 @@ const getCollection = (collection) => {
       error.value = "could not fetch the data";
     }
   );
+  watchEffect((oninvalidate) => {
+    oninvalidate(() => {
+      unsub();
+    });
+  });
   return { error, documents };
 };
 

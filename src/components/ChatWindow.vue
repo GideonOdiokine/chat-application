@@ -2,13 +2,13 @@
   <div class="chat-window">
     <h2>Chat Messages</h2>
     <div v-if="error">{{ error }}</div>
-    <div v-if="formattedDocuments" class="messages">
+    <div v-if="formattedDocuments" class="messages" ref="messages">
       <div
         v-for="(doc, index) in formattedDocuments"
         :key="doc.id"
         class="single"
       >
-        <div class="container" :class="{ darker: index % 2 === 1 }">
+        <div class="container" :class="{  align : index % 2 === 1 }">
           <div>
             <span class="name">{{ doc.name }}</span>
             <p>{{ doc.message }}</p>
@@ -29,7 +29,7 @@
 
 <script>
 import getCollection from "../composables/getCollection";
-import { computed } from "vue";
+import { computed, onUpdated, ref } from "vue";
 import { formatDistanceToNow } from "date-fns";
 export default {
   setup() {
@@ -43,7 +43,11 @@ export default {
         });
       }
     });
-    return { error, documents, formattedDocuments };
+    const messages = ref(null);
+    onUpdated(() => {
+      messages.value.scrollTop = messages.value.scrollHeight;
+    });
+    return { error, documents, formattedDocuments, messages };
   },
 };
 </script>
@@ -51,6 +55,9 @@ export default {
 <style scoped>
 h2 {
   padding: 20px;
+}
+.align {
+  text-align: right;
 }
 .container {
   width: auto;
