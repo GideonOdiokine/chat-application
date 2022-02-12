@@ -24,8 +24,8 @@ export default {
 
   setup() {
   onCreated(()=>{
-document.title="Chat
-})  App"
+document.title="chat app"
+})  
     //   refs
     const showLogin = ref(true);
     const router = useRouter();
