@@ -8,7 +8,10 @@
         :key="doc.id"
         class="single"
       >
-        <div class="container" :class="{  align : index % 2 === 1 }">
+        <div
+          class="container"
+          :class="{ align: index % 2 === 1, darker: index % 2 === 1 }"
+        >
           <div>
             <span class="name">{{ doc.name }}</span>
             <p>{{ doc.message }}</p>
