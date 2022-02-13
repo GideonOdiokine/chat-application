@@ -1,4 +1,4 @@
-# vue-blog
+# chat-application
 
 ## Project setup
 ```
